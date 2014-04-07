@@ -59,6 +59,7 @@ class RecaptchaType extends AbstractType
         $this->publicKey = $container->getParameter('ewz_recaptcha.public_key');
         $this->secure    = $container->getParameter('ewz_recaptcha.secure');
         $this->enabled   = $container->getParameter('ewz_recaptcha.enabled');
+        $this->custom_form = $container->getParameter('ewz_recaptcha.custom_form');
         $this->language  = $container->getParameter($container->getParameter('ewz_recaptcha.locale_key'));
     }
 
@@ -100,7 +101,7 @@ class RecaptchaType extends AbstractType
             'url_noscript'  => null,
             'attr'          => array(
                 'options' => array(
-                    'theme' => 'clean',
+                    'theme' => $this->custom_form ? 'custom' : 'clean',
 	    	    'lang'  => $this->language,
     	        ),
 	    ),

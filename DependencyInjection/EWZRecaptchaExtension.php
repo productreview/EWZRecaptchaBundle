@@ -39,22 +39,24 @@ class EWZRecaptchaExtension extends Extension
     {
         $templatingEngines = $container->getParameter('templating.engines');
 
-        if (in_array('php', $templatingEngines)) {
-            $formRessource = 'EWZRecaptchaBundle:Form';
+        if (!$container->getParameter('ewz_recaptcha.custom_form')) {
+            if (in_array('php', $templatingEngines)) {
+                $formRessource = 'EWZRecaptchaBundle:Form';
 
-            $container->setParameter('templating.helper.form.resources', array_merge(
-                $container->getParameter('templating.helper.form.resources'),
-                array($formRessource)
-            ));
-        }
+                $container->setParameter('templating.helper.form.resources', array_merge(
+                    $container->getParameter('templating.helper.form.resources'),
+                    array($formRessource)
+                ));
+            }
 
-        if (in_array('twig', $templatingEngines)) {
-            $formRessource = 'EWZRecaptchaBundle:Form:ewz_recaptcha_widget.html.twig';
+            if (in_array('twig', $templatingEngines)) {
+                $formRessource = 'EWZRecaptchaBundle:Form:ewz_recaptcha_widget.html.twig';
 
-            $container->setParameter('twig.form.resources', array_merge(
-                $container->getParameter('twig.form.resources'),
-                array($formRessource)
-            ));
+                $container->setParameter('twig.form.resources', array_merge(
+                    $container->getParameter('twig.form.resources'),
+                    array($formRessource)
+                ));
+            }
         }
     }
 }
